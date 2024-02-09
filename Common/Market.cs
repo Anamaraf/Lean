@@ -68,6 +68,8 @@ namespace QuantConnect
             Tuple.Create(BinanceUS, 36),
             Tuple.Create(Bybit, 37),
             Tuple.Create(Coinbase, 38),
+            
+            Tuple.Create(Metatrader, 999)
         };
 
         static Market()
@@ -242,6 +244,11 @@ namespace QuantConnect
         /// Coinbase
         /// </summary>
         public const string Coinbase = "coinbase";
+
+        /// <summary>
+        /// Coinbase
+        /// </summary>
+        public const string Metatrader = "metatrader";
 
         /// <summary>
         /// Adds the specified market to the map of available markets with the specified identifier.

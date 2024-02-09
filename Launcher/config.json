@@ -1,4 +1,6 @@
 {
+  "results-destination-folder": "../../../../Results/",
+
   // this configuration file works by first loading all top-level
   // configuration items and then will load the specified environment
   // on top, this provides a layering affect. environment names can be
@@ -6,10 +8,11 @@
   // two predefined environments, 'backtesting' and 'live', feel free
   // to add more!
 
-  "environment": "backtesting", // "live-paper", "backtesting", "live-interactive", "live-interactive-iqfeed"
+  "environment": "live-metatrader", // "live-paper", "backtesting", "live-interactive", "live-interactive-iqfeed"
 
   // algorithm class selector
-  "algorithm-type-name": "BasicTemplateFrameworkAlgorithm",
+  "algorithm-type-name": "CustomChartingAlgorithm",
+  //"algorithm-type-name": "BasicTemplateFrameworkAlgorithm",
 
   // Algorithm language selector - options CSharp, Python
   "algorithm-language": "CSharp",
@@ -25,7 +28,7 @@
   "data-folder": "../../../Data/",
 
   // debugging configuration - options for debugging-method LocalCmdLine, VisualStudio, Debugpy, PyCharm
-  "debugging": false,
+  "debugging": true,
   "debugging-method": "LocalCmdline",
 
   // location of a python virtual env to use libraries from
@@ -49,7 +52,7 @@
   "symbol-tick-limit": 10000,
 
   // log missing data files, useful for debugging
-  "show-missing-data-logs": false,
+  "show-missing-data-logs": true,
 
   // For live trading during warmup we limit the amount of historical data fetched from the history provider and expect the data to be on disk for older data
   "maximum-warmup-history-days-look-back": 5,
@@ -213,6 +216,9 @@
   "exante-account-id": "", // Account-id is assigned after registration at Exante
   "exante-platform-type": "", // Environment of the application: live or demo
 
+  // MetaTrader configuration
+  "metatrader-exchange-directory": "C:/Metatrader/GBE MetaTrader 5/MQL5/Files/DWX",
+  
   // Required to access data from Nasdaq
   // To get your access token go to https://data.nasdaq.com/account/profile
   "nasdaq-auth-token": "",
@@ -650,6 +656,23 @@
       // real brokerage implementations require the BrokerageTransactionHandler
       "live-mode-brokerage": "QuantConnect.EzeBrokerage.EzeBrokerage",
       "data-queue-handler": [ "QuantConnect.EzeBrokerage.EzeBrokerage" ],
+      "setup-handler": "QuantConnect.Lean.Engine.Setup.BrokerageSetupHandler",
+      "result-handler": "QuantConnect.Lean.Engine.Results.LiveTradingResultHandler",
+      "data-feed-handler": "QuantConnect.Lean.Engine.DataFeeds.LiveTradingDataFeed",
+      "real-time-handler": "QuantConnect.Lean.Engine.RealTime.LiveTradingRealTimeHandler",
+      "transaction-handler": "QuantConnect.Lean.Engine.TransactionHandlers.BrokerageTransactionHandler",
+      "history-provider": [ "BrokerageHistoryProvider", "SubscriptionDataReaderHistoryProvider" ]
+    },
+
+    // defines 'live-metatrader' environment
+    "live-metatrader": {
+      "live-mode": true,
+
+      // real brokerage implementations require the BrokerageTransactionHandler
+      "live-mode-brokerage": "QuantConnect.MetatraderBrokerage.MetatraderBrokerage",
+      "data-queue-handler": [ "QuantConnect.Lean.Engine.DataFeeds.Queues.LiveDataQueue" ],
+      //"data-queue-handler": [ "QuantConnect.MetatraderBrokerage.MetatraderBrokerage" ],
+
       "setup-handler": "QuantConnect.Lean.Engine.Setup.BrokerageSetupHandler",
       "result-handler": "QuantConnect.Lean.Engine.Results.LiveTradingResultHandler",
       "data-feed-handler": "QuantConnect.Lean.Engine.DataFeeds.LiveTradingDataFeed",
