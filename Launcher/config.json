@@ -104,6 +104,12 @@
   "oanda-access-token": "",
   "oanda-account-id": "",
 
+  // metatrader configuration
+  "metatrader-market": "metatrader_gbebrokers",
+  "metatrader-account-id": 709194,
+  "metatrader-api": "FileBasedMetatraderApi",
+  "metatrader-files-directory": "C:/Metatrader/GBE MetaTrader 5/MQL5/Files/",
+
   // fxcm configuration
   "fxcm-server": "http://www.fxcorporate.com/Hosts.jsp",
   "fxcm-terminal": "Demo", //Real or Demo
@@ -216,9 +222,6 @@
   "exante-account-id": "", // Account-id is assigned after registration at Exante
   "exante-platform-type": "", // Environment of the application: live or demo
 
-  // MetaTrader configuration
-  "metatrader-exchange-directory": "C:/Metatrader/GBE MetaTrader 5/MQL5/Files/DWX",
-  
   // Required to access data from Nasdaq
   // To get your access token go to https://data.nasdaq.com/account/profile
   "nasdaq-auth-token": "",
